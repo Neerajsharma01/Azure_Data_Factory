@@ -1,0 +1,10 @@
+{
+	"name": "AzureKeyVault_Linked_Service",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://DataVault-Key-Vault.vault.azure.net/"
+		}
+	}
+}
