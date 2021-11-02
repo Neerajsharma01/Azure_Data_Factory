@@ -1,0 +1,9 @@
+{
+	"name": "Data-Vault-Pipelines",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "fd7a8c62-3a62-47a4-8b1c-4143a52bbd54",
+		"tenantId": "a45fe71a-f480-4e42-ad5e-aff33165aa35"
+	}
+}
