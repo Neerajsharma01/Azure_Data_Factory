@@ -1,0 +1,41 @@
+{
+	"name": "Snowflake_Data_Vault_Tables",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Snowflake_Linked_Service",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeTable",
+		"schema": [
+			{
+				"name": "HK_ITEM_ID",
+				"type": "BINARY",
+				"precision": 32,
+				"scale": 0
+			},
+			{
+				"name": "ITEM_ID",
+				"type": "VARCHAR",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "LOAD_DTS",
+				"type": "TIMESTAMP_NTZ",
+				"precision": 29,
+				"scale": 9
+			},
+			{
+				"name": "REC_SRC",
+				"type": "VARCHAR",
+				"precision": 100,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"schema": "DATA_VAULT",
+			"table": "HUB_ITEM"
+		}
+	}
+}
