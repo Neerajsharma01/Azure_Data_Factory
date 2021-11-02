@@ -10,8 +10,8 @@
 		"schema": [
 			{
 				"name": "HK_ITEM_ID",
-				"type": "BINARY",
-				"precision": 32,
+				"type": "VARCHAR",
+				"precision": 100,
 				"scale": 0
 			},
 			{
