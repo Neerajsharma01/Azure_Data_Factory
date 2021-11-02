@@ -1,0 +1,13 @@
+{
+	"name": "Item_DataFlow",
+	"properties": {
+		"description": "Data Flow for Item",
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [],
+			"sinks": [],
+			"transformations": [],
+			"script": ""
+		}
+	}
+}
