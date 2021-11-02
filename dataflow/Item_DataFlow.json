@@ -4,10 +4,14 @@
 		"description": "Data Flow for Item",
 		"type": "MappingDataFlow",
 		"typeProperties": {
-			"sources": [],
+			"sources": [
+				{
+					"name": "postgresiteminfo"
+				}
+			],
 			"sinks": [],
 			"transformations": [],
-			"script": ""
+			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false) ~> postgresiteminfo"
 		}
 	}
 }
