@@ -22,8 +22,15 @@
 					"name": "SnowflakeHUBITEM"
 				}
 			],
-			"transformations": [],
-			"script": "source(output(\n\t\titem_id as string,\n\t\titem_desc as string,\n\t\tcurrent_price as double,\n\t\twholesale_price as double,\n\t\tbrand_id as integer,\n\t\tbrand as string,\n\t\tclass_id as integer,\n\t\tclass as string,\n\t\tcategory_id as integer,\n\t\tcategory as string,\n\t\tmanufact_id as integer,\n\t\tmanufact as string,\n\t\tsize as string,\n\t\tpromo_id as integer,\n\t\tstart_date as date,\n\t\tend_date as date,\n\t\tdiscount_cost as double,\n\t\tpromo_name as string,\n\t\tpromo_type as string,\n\t\tmin_qty as integer,\n\t\tmax_qty as integer,\n\t\tdiscount_active as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true,\n\tisolationLevel: 'NONE',\n\tformat: 'table') ~> postgresSQLItemInfo\npostgresSQLItemInfo sink(allowSchemaDrift: true,\n\tvalidateSchema: true,\n\tinput(\n\t\tHK_ITEM_ID as binary,\n\t\tITEM_ID as string,\n\t\tLOAD_DTS as timestamp,\n\t\tREC_SRC as string\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tstageInsert: true) ~> SnowflakeHUBITEM"
+			"transformations": [
+				{
+					"name": "SelectTableData"
+				},
+				{
+					"name": "Expression"
+				}
+			],
+			"script": "source(output(\n\t\titem_id as string,\n\t\titem_desc as string,\n\t\tcurrent_price as double,\n\t\twholesale_price as double,\n\t\tbrand_id as integer,\n\t\tbrand as string,\n\t\tclass_id as integer,\n\t\tclass as string,\n\t\tcategory_id as integer,\n\t\tcategory as string,\n\t\tmanufact_id as integer,\n\t\tmanufact as string,\n\t\tsize as string,\n\t\tpromo_id as integer,\n\t\tstart_date as date,\n\t\tend_date as date,\n\t\tdiscount_cost as double,\n\t\tpromo_name as string,\n\t\tpromo_type as string,\n\t\tmin_qty as integer,\n\t\tmax_qty as integer,\n\t\tdiscount_active as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true,\n\tisolationLevel: 'NONE',\n\tformat: 'table') ~> postgresSQLItemInfo\npostgresSQLItemInfo select(mapColumn(\n\t\titem_id,\n\t\titem_desc,\n\t\tcurrent_price,\n\t\twholesale_price,\n\t\tbrand_id,\n\t\tbrand,\n\t\tclass_id,\n\t\tclass,\n\t\tcategory_id,\n\t\tcategory,\n\t\tmanufact_id,\n\t\tmanufact,\n\t\tsize,\n\t\tpromo_id,\n\t\tstart_date,\n\t\tend_date,\n\t\tdiscount_cost,\n\t\tpromo_name,\n\t\tpromo_type,\n\t\tmin_qty,\n\t\tmax_qty,\n\t\tdiscount_active\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectTableData\nSelectTableData derive(HK_ITEM_ID = md5(item_id),\n\t\titem_id = item_id,\n\t\tLOAD_DTS = currentTimestamp(),\n\t\tREC_SRC = 'ITEM_INFO') ~> Expression\nExpression sink(allowSchemaDrift: true,\n\tvalidateSchema: true,\n\tinput(\n\t\tHK_ITEM_ID as binary,\n\t\tITEM_ID as string,\n\t\tLOAD_DTS as timestamp,\n\t\tREC_SRC as string\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tstageInsert: true,\n\tmapColumn(\n\t\tHK_ITEM_ID,\n\t\tITEM_ID = item_id,\n\t\tLOAD_DTS,\n\t\tREC_SRC\n\t)) ~> SnowflakeHUBITEM"
 		}
 	}
 }
