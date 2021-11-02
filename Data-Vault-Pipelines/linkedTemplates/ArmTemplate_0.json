@@ -307,6 +307,53 @@
 				"[concat(variables('factoryId'), '/datasets/AzurePostgreSql_Item_Info')]",
 				"[concat(variables('factoryId'), '/datasets/Snowflake_Data_Vault_Tables')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Data_Vault_Hub_Load_Pipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Item_DataFlow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Item_DataFlow",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"postgresSQLItemInfo": {},
+									"SnowflakeHUBITEM": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Coarse"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/Item_DataFlow')]"
+			]
 		}
 	]
 }
