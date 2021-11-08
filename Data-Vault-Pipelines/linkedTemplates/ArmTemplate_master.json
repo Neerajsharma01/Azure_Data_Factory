@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzurePostgreSql_Linked_Service'"
 		},
+		"AzureSqlDatabase_Linked_Service_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase_Linked_Service'"
+		},
 		"AzureKeyVault_Linked_Service_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://DataVault-Key-Vault.vault.azure.net/"
@@ -45,6 +49,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"AzureSqlDatabase_Linked_Service_connectionString": {
+						"value": "[parameters('AzureSqlDatabase_Linked_Service_connectionString')]"
 					},
 					"AzurePostgreSql_Linked_Service_connectionString": {
 						"value": "[parameters('AzurePostgreSql_Linked_Service_connectionString')]"

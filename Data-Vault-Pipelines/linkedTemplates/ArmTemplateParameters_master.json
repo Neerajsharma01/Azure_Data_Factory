@@ -8,6 +8,9 @@
 		"AzurePostgreSql_Linked_Service_connectionString": {
 			"value": ""
 		},
+		"AzureSqlDatabase_Linked_Service_connectionString": {
+			"value": ""
+		},
 		"AzureKeyVault_Linked_Service_properties_typeProperties_baseUrl": {
 			"value": "https://DataVault-Key-Vault.vault.azure.net/"
 		},
