@@ -1,5 +1,5 @@
 {
-	"name": "AzureSql_Data_Vault_Tables",
+	"name": "AzureSql_HUB_ITEM",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase_Linked_Service",
