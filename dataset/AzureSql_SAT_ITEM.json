@@ -13,14 +13,64 @@
 				"type": "varchar"
 			},
 			{
-				"name": "ITEM_ID",
-				"type": "varchar"
-			},
-			{
 				"name": "LOAD_DTS",
 				"type": "datetime",
 				"precision": 23,
 				"scale": 3
+			},
+			{
+				"name": "ITEM_DESC",
+				"type": "varchar"
+			},
+			{
+				"name": "CURRENT_PRICE",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "WHOLESALE_PRICE",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "BRAND_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BRAND",
+				"type": "varchar"
+			},
+			{
+				"name": "CLASS_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CLASS",
+				"type": "varchar"
+			},
+			{
+				"name": "CATEGORY_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CATEGORY",
+				"type": "varchar"
+			},
+			{
+				"name": "MANUFACT_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MANUFACT",
+				"type": "varchar"
+			},
+			{
+				"name": "SIZE",
+				"type": "varchar"
 			},
 			{
 				"name": "REC_SRC",
