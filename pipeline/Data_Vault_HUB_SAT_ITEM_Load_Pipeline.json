@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Item_DataFlow",
+				"name": "HUB_ITEM_DataFlow",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -31,7 +31,7 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "Item_DataFlow",
+						"activity": "HUB_ITEM_DataFlow",
 						"dependencyConditions": [
 							"Succeeded"
 						]
