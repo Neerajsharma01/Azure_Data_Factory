@@ -14,7 +14,7 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "AzureSql_Data_Vault_Tables",
+						"referenceName": "AzureSql_HUB_ITEM",
 						"type": "DatasetReference"
 					},
 					"name": "AzureSQLHubItemLookup"
@@ -23,7 +23,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "AzureSql_Data_Vault_Tables",
+						"referenceName": "AzureSql_HUB_ITEM",
 						"type": "DatasetReference"
 					},
 					"name": "AzureSQLHubItem"
