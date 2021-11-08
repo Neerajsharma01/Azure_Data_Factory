@@ -1,5 +1,5 @@
 {
-	"name": "Item_DataFlow",
+	"name": "HUB_ITEM_DataFlow",
 	"properties": {
 		"description": "Data Flow for Item",
 		"type": "MappingDataFlow",
