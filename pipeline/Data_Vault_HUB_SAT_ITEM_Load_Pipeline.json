@@ -1,5 +1,5 @@
 {
-	"name": "Data_Vault_Hub_Load_Pipeline",
+	"name": "Data_Vault_HUB_SAT_ITEM_Load_Pipeline",
 	"properties": {
 		"activities": [
 			{
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "Item_DataFlow",
+						"referenceName": "HUB_ITEM_DataFlow",
 						"type": "DataFlowReference"
 					},
 					"compute": {
