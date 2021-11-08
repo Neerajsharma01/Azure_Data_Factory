@@ -1,0 +1,35 @@
+{
+	"name": "AzureSql_SAT_ITEM",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_Linked_Service",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "HK_ITEM_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "ITEM_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "LOAD_DTS",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "REC_SRC",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "SAT_ITEM"
+		}
+	}
+}
