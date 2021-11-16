@@ -14,7 +14,7 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "AzureSql_HUB_ITEM",
+						"referenceName": "AzureSql_HUB_PROMOTION",
 						"type": "DatasetReference"
 					},
 					"name": "AzureSQLHubItemLookup"
