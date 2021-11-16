@@ -1,0 +1,8 @@
+{
+	"name": "Data_Vault_HUB_SAT_PROMOTION_Load_Pipeline",
+	"properties": {
+		"annotations": [],
+		"lastPublishTime": "2021-11-08T16:06:21Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
