@@ -6,9 +6,9 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"dataset": {
-						"referenceName": "AzureSql_HUB_PROMOTION",
-						"type": "DatasetReference"
+					"linkedService": {
+						"referenceName": "AzureSqlDatabase_Linked_Service",
+						"type": "LinkedServiceReference"
 					},
 					"name": "AzureSQLHubPromotion"
 				},
@@ -31,19 +31,10 @@
 			],
 			"transformations": [
 				{
-					"name": "SelectTableData"
-				},
-				{
-					"name": "Expression"
-				},
-				{
-					"name": "UpdateStrategy"
-				},
-				{
-					"name": "CheckItemIDExists"
+					"name": "JoinHubItemPromotion"
 				}
 			],
-			"script": "source(output(\n\t\tHK_PROMOTION_ID as string,\n\t\tPROMOTION_ID as string,\n\t\tLOAD_DTS as timestamp,\n\t\tREC_SRC as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true,\n\tisolationLevel: 'NONE',\n\tformat: 'table') ~> AzureSQLHubPromotion\nsource(output(\n\t\tHK_ITEM_ID as string,\n\t\tITEM_ID as string,\n\t\tLOAD_DTS as timestamp,\n\t\tREC_SRC as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> AzureSQLHubItem\nAzureSQLHubPromotion select(skipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectTableData\nSelectTableData derive(HK_ITEM_ID = md5(item_id),\n\t\tLOAD_DTS = currentTimestamp(),\n\t\tREC_SRC = 'ITEM_INFO') ~> Expression\nCheckItemIDExists alterRow(insertIf(iif(isNull(HK_ITEM_ID),true(),false()))) ~> UpdateStrategy\nExpression, AzureSQLHubItem exists(SelectTableData@item_id == AzureSQLHubItemLookup@ITEM_ID,\n\tnegate:true,\n\tbroadcast: 'auto')~> CheckItemIDExists\nUpdateStrategy sink(allowSchemaDrift: true,\n\tvalidateSchema: true,\n\tinput(\n\t\tHK_ITEM_ID as string,\n\t\tITEM_ID as string,\n\t\tLOAD_DTS as timestamp,\n\t\tREC_SRC as string\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tHK_ITEM_ID,\n\t\tITEM_ID = item_id,\n\t\tLOAD_DTS,\n\t\tREC_SRC\n\t)) ~> AzureSQLLnkItemPromotion"
+			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true,\n\tformat: 'query',\n\tstore: 'sqlserver',\n\tquery: 'SELECT hp.HK_PROMOTION_ID,hp.PROMOTION_ID,sp.ITEM_ID  FROM DataVaultDB.dbo.HUB_PROMOTION hp  \\nINNER JOIN DataVaultDB.dbo.SAT_PROMOTION sp \\non hp.HK_PROMOTION_ID = sp.HK_PROMOTION_ID  ',\n\tisolationLevel: 'READ_UNCOMMITTED') ~> AzureSQLHubPromotion\nsource(output(\n\t\tHK_ITEM_ID as string,\n\t\tITEM_ID as string,\n\t\tLOAD_DTS as timestamp,\n\t\tREC_SRC as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> AzureSQLHubItem\nAzureSQLHubPromotion, AzureSQLHubItem join(ERROR_FUNCTION('') == ITEM_ID,\n\tjoinType:'right',\n\tbroadcast: 'auto')~> JoinHubItemPromotion\nJoinHubItemPromotion sink(allowSchemaDrift: true,\n\tvalidateSchema: true,\n\tinput(\n\t\tHK_ITEM_ID as string,\n\t\tITEM_ID as string,\n\t\tLOAD_DTS as timestamp,\n\t\tREC_SRC as string\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tHK_ITEM_ID,\n\t\tITEM_ID = item_id,\n\t\tLOAD_DTS,\n\t\tREC_SRC\n\t)) ~> AzureSQLLnkItemPromotion"
 		}
 	}
 }
