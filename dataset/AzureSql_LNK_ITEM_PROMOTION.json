@@ -9,11 +9,15 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
+				"name": "HK_L_ITEM_PROMOTION",
+				"type": "varchar"
+			},
+			{
 				"name": "HK_ITEM_ID",
 				"type": "varchar"
 			},
 			{
-				"name": "ITEM_ID",
+				"name": "HK_PROMOTION_ID",
 				"type": "varchar"
 			},
 			{
