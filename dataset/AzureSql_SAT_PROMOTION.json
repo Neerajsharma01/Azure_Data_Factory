@@ -9,7 +9,7 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "HK_ITEM_ID",
+				"name": "HK_PROMOTION_ID",
 				"type": "varchar"
 			},
 			{
@@ -19,57 +19,46 @@
 				"scale": 3
 			},
 			{
-				"name": "ITEM_DESC",
+				"name": "START_DATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "END_DATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "ITEM_ID",
 				"type": "varchar"
 			},
 			{
-				"name": "CURRENT_PRICE",
+				"name": "DISCOUNT_COST",
 				"type": "float",
 				"precision": 15
 			},
 			{
-				"name": "WHOLESALE_PRICE",
-				"type": "float",
-				"precision": 15
+				"name": "PROMO_NAME",
+				"type": "varchar"
 			},
 			{
-				"name": "BRAND_ID",
+				"name": "PROMO_TYPE",
+				"type": "varchar"
+			},
+			{
+				"name": "MIN_QTY",
 				"type": "int",
 				"precision": 10
 			},
 			{
-				"name": "BRAND",
-				"type": "varchar"
-			},
-			{
-				"name": "CLASS_ID",
+				"name": "MAX_QTY",
 				"type": "int",
 				"precision": 10
 			},
 			{
-				"name": "CLASS",
-				"type": "varchar"
-			},
-			{
-				"name": "CATEGORY_ID",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "CATEGORY",
-				"type": "varchar"
-			},
-			{
-				"name": "MANUFACT_ID",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "MANUFACT",
-				"type": "varchar"
-			},
-			{
-				"name": "SIZE",
+				"name": "DISCOUNT_ACTIVE",
 				"type": "varchar"
 			},
 			{
