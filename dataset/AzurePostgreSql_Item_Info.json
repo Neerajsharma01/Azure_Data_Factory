@@ -145,5 +145,6 @@
 			"schema": "retail",
 			"table": "item_info"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }
