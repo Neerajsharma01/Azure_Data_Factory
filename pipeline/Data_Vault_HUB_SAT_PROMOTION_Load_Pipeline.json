@@ -1,6 +1,32 @@
 {
 	"name": "Data_Vault_HUB_SAT_PROMOTION_Load_Pipeline",
 	"properties": {
+		"activities": [
+			{
+				"name": "HUB_PROMO_DataFlow",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "HUB_PROMO_DataFlow",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
 		"annotations": [],
 		"lastPublishTime": "2021-11-08T16:06:21Z"
 	},
