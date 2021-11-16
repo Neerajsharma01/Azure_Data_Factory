@@ -1,5 +1,5 @@
 {
-	"name": "AzureSql_HUB_PROMO",
+	"name": "AzureSql_HUB_PROMOTION",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase_Linked_Service",
