@@ -1,5 +1,5 @@
 {
-	"name": "AzureSql_HUB_ITEM_copy1",
+	"name": "AzureSql_LNK_ITEM_PROMOTION",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase_Linked_Service",
