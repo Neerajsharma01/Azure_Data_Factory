@@ -95,6 +95,90 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureSql_HUB_PROMOTION')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase_Linked_Service",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "HK_PROMOTION_ID",
+						"type": "varchar"
+					},
+					{
+						"name": "PROMOTION_ID",
+						"type": "varchar"
+					},
+					{
+						"name": "LOAD_DTS",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "REC_SRC",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "HUB_PROMOTION"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase_Linked_Service')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSql_LNK_ITEM_PROMOTION')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase_Linked_Service",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "HK_L_ITEM_PROMOTION",
+						"type": "varchar"
+					},
+					{
+						"name": "HK_ITEM_ID",
+						"type": "varchar"
+					},
+					{
+						"name": "HK_PROMOTION_ID",
+						"type": "varchar"
+					},
+					{
+						"name": "LOAD_DTS",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "REC_SRC",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "LINK_ITEM_PROMOTION"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase_Linked_Service')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureSql_SAT_ITEM')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -185,92 +269,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzurePostgreSql_Linked_Service')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzurePostgreSql",
-				"typeProperties": {
-					"connectionString": "[parameters('AzurePostgreSql_Linked_Service_connectionString')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault_Linked_Service",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "AzurePostgresSQL-Pwd"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault_Linked_Service')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Snowflake_Linked_Service')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "Snowflake",
-				"typeProperties": {
-					"connectionString": "[parameters('Snowflake_Linked_Service_connectionString')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault_Linked_Service",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "Snowflake-pass"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault_Linked_Service')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSql_HUB_PROMOTION')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase_Linked_Service",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "HK_PROMOTION_ID",
-						"type": "varchar"
-					},
-					{
-						"name": "PROMOTION_ID",
-						"type": "varchar"
-					},
-					{
-						"name": "LOAD_DTS",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "REC_SRC",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "HUB_PROMOTION"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase_Linked_Service')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/AzureSql_SAT_PROMOTION')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -347,6 +345,52 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase_Linked_Service')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzurePostgreSql_Linked_Service')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzurePostgreSql",
+				"typeProperties": {
+					"connectionString": "[parameters('AzurePostgreSql_Linked_Service_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault_Linked_Service",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "AzurePostgresSQL-Pwd"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault_Linked_Service')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Snowflake_Linked_Service')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Snowflake",
+				"typeProperties": {
+					"connectionString": "[parameters('Snowflake_Linked_Service_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault_Linked_Service",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "Snowflake-pass"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault_Linked_Service')]"
 			]
 		},
 		{
@@ -550,6 +594,59 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/LNK_ITEM_PROMOTION_DataFlow')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Data Flow for Item",
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "AzureSql_HUB_PROMOTION",
+								"type": "DatasetReference"
+							},
+							"name": "AzureSQLHubPromotion"
+						},
+						{
+							"dataset": {
+								"referenceName": "AzureSql_HUB_ITEM",
+								"type": "DatasetReference"
+							},
+							"name": "AzureSQLHubItem"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "AzureSql_LNK_ITEM_PROMOTION",
+								"type": "DatasetReference"
+							},
+							"name": "AzureSQLLnkItemPromotion"
+						}
+					],
+					"transformations": [
+						{
+							"name": "JoinHubItemPromotion"
+						},
+						{
+							"name": "SelectData"
+						},
+						{
+							"name": "Expression"
+						}
+					],
+					"script": "source(output(\n\t\tHK_PROMOTION_ID as string,\n\t\tPROMOTION_ID as string,\n\t\tITEM_ID as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true,\n\tisolationLevel: 'NONE',\n\tquery: 'SELECT hp.HK_PROMOTION_ID,hp.PROMOTION_ID,sp.ITEM_ID  FROM DataVaultDB.dbo.HUB_PROMOTION hp  \\nINNER JOIN DataVaultDB.dbo.SAT_PROMOTION sp \\non hp.HK_PROMOTION_ID = sp.HK_PROMOTION_ID  ',\n\tformat: 'query') ~> AzureSQLHubPromotion\nsource(output(\n\t\tHK_ITEM_ID as string,\n\t\tITEM_ID as string,\n\t\tLOAD_DTS as timestamp,\n\t\tREC_SRC as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> AzureSQLHubItem\nSelectData, AzureSQLHubItem join(SelectData@ITEM_ID == AzureSQLHubItem@ITEM_ID,\n\tjoinType:'right',\n\tbroadcast: 'auto')~> JoinHubItemPromotion\nAzureSQLHubPromotion select(skipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectData\nJoinHubItemPromotion derive(HK_L_ITEM_PROMOTION = md5(concat(HK_ITEM_ID,coalesce(PROMOTION_ID,'NA'))),\n\t\tLOAD_DTS = currentTimestamp(),\n\t\tREC_SRC = 'ITEM_INFO') ~> Expression\nExpression sink(allowSchemaDrift: true,\n\tvalidateSchema: true,\n\tinput(\n\t\tHK_L_ITEM_PROMOTION as string,\n\t\tHK_ITEM_ID as string,\n\t\tHK_PROMOTION_ID as string,\n\t\tLOAD_DTS as timestamp,\n\t\tREC_SRC as string\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tHK_L_ITEM_PROMOTION,\n\t\tHK_ITEM_ID,\n\t\tHK_PROMOTION_ID,\n\t\tLOAD_DTS,\n\t\tREC_SRC\n\t)) ~> AzureSQLLnkItemPromotion"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/AzureSql_HUB_PROMOTION')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSql_HUB_ITEM')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSql_LNK_ITEM_PROMOTION')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/HUB_ITEM_DataFlow')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
@@ -602,6 +699,64 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/AzurePostgreSql_Item_Info')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSql_HUB_ITEM')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HUB_PROMO_DataFlow')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Data Flow for Item",
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "AzurePostgreSql_Item_Info",
+								"type": "DatasetReference"
+							},
+							"name": "postgresSQLItemInfo"
+						},
+						{
+							"dataset": {
+								"referenceName": "AzureSql_HUB_PROMOTION",
+								"type": "DatasetReference"
+							},
+							"name": "AzureSQLHubPromotionLookup"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "AzureSql_HUB_PROMOTION",
+								"type": "DatasetReference"
+							},
+							"name": "AzureSQLHubPromotion"
+						}
+					],
+					"transformations": [
+						{
+							"name": "SelectTableData"
+						},
+						{
+							"name": "Expression"
+						},
+						{
+							"name": "UpdateStrategy"
+						},
+						{
+							"name": "CheckPromoIDExists"
+						},
+						{
+							"name": "FilterPromoData"
+						}
+					],
+					"script": "source(output(\n\t\titem_id as string,\n\t\titem_desc as string,\n\t\tcurrent_price as double,\n\t\twholesale_price as double,\n\t\tbrand_id as integer,\n\t\tbrand as string,\n\t\tclass_id as integer,\n\t\tclass as string,\n\t\tcategory_id as integer,\n\t\tcategory as string,\n\t\tmanufact_id as integer,\n\t\tmanufact as string,\n\t\tsize as string,\n\t\tpromo_id as integer,\n\t\tstart_date as date,\n\t\tend_date as date,\n\t\tdiscount_cost as double,\n\t\tpromo_name as string,\n\t\tpromo_type as string,\n\t\tmin_qty as integer,\n\t\tmax_qty as integer,\n\t\tdiscount_active as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true,\n\tisolationLevel: 'NONE',\n\tformat: 'table') ~> postgresSQLItemInfo\nsource(output(\n\t\tHK_PROMOTION_ID as string,\n\t\tPROMOTION_ID as string,\n\t\tLOAD_DTS as timestamp,\n\t\tREC_SRC as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> AzureSQLHubPromotionLookup\npostgresSQLItemInfo select(skipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectTableData\nFilterPromoData derive(HK_PROMOTION_ID = md5(promo_id),\n\t\tLOAD_DTS = currentTimestamp(),\n\t\tREC_SRC = 'ITEM_INFO',\n\t\tPROMOTION_ID = toString(promo_id)) ~> Expression\nCheckPromoIDExists alterRow(insertIf(iif(isNull(HK_PROMOTION_ID),true(),false()))) ~> UpdateStrategy\nExpression, AzureSQLHubPromotionLookup exists(Expression@PROMOTION_ID == AzureSQLHubPromotionLookup@PROMOTION_ID,\n\tnegate:true,\n\tbroadcast: 'auto')~> CheckPromoIDExists\nSelectTableData filter(not(isNull(promo_id))) ~> FilterPromoData\nUpdateStrategy sink(allowSchemaDrift: true,\n\tvalidateSchema: true,\n\tinput(\n\t\tHK_PROMOTION_ID as string,\n\t\tPROMOTION_ID as string,\n\t\tLOAD_DTS as timestamp,\n\t\tREC_SRC as string\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tHK_PROMOTION_ID,\n\t\tPROMOTION_ID = promo_id,\n\t\tLOAD_DTS,\n\t\tREC_SRC\n\t)) ~> AzureSQLHubPromotion"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/AzurePostgreSql_Item_Info')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSql_HUB_PROMOTION')]"
 			]
 		},
 		{
@@ -671,64 +826,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/HUB_PROMO_DataFlow')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Data Flow for Item",
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "AzurePostgreSql_Item_Info",
-								"type": "DatasetReference"
-							},
-							"name": "postgresSQLItemInfo"
-						},
-						{
-							"dataset": {
-								"referenceName": "AzureSql_HUB_PROMOTION",
-								"type": "DatasetReference"
-							},
-							"name": "AzureSQLHubPromotionLookup"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "AzureSql_HUB_PROMOTION",
-								"type": "DatasetReference"
-							},
-							"name": "AzureSQLHubPromotion"
-						}
-					],
-					"transformations": [
-						{
-							"name": "SelectTableData"
-						},
-						{
-							"name": "Expression"
-						},
-						{
-							"name": "UpdateStrategy"
-						},
-						{
-							"name": "CheckPromoIDExists"
-						},
-						{
-							"name": "FilterPromoData"
-						}
-					],
-					"script": "source(output(\n\t\titem_id as string,\n\t\titem_desc as string,\n\t\tcurrent_price as double,\n\t\twholesale_price as double,\n\t\tbrand_id as integer,\n\t\tbrand as string,\n\t\tclass_id as integer,\n\t\tclass as string,\n\t\tcategory_id as integer,\n\t\tcategory as string,\n\t\tmanufact_id as integer,\n\t\tmanufact as string,\n\t\tsize as string,\n\t\tpromo_id as integer,\n\t\tstart_date as date,\n\t\tend_date as date,\n\t\tdiscount_cost as double,\n\t\tpromo_name as string,\n\t\tpromo_type as string,\n\t\tmin_qty as integer,\n\t\tmax_qty as integer,\n\t\tdiscount_active as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true,\n\tisolationLevel: 'NONE',\n\tformat: 'table') ~> postgresSQLItemInfo\nsource(output(\n\t\tHK_PROMOTION_ID as string,\n\t\tPROMOTION_ID as string,\n\t\tLOAD_DTS as timestamp,\n\t\tREC_SRC as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> AzureSQLHubPromotionLookup\npostgresSQLItemInfo select(skipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectTableData\nFilterPromoData derive(HK_PROMOTION_ID = md5(promo_id),\n\t\tLOAD_DTS = currentTimestamp(),\n\t\tREC_SRC = 'ITEM_INFO',\n\t\tPROMOTION_ID = toString(promo_id)) ~> Expression\nCheckPromoIDExists alterRow(insertIf(iif(isNull(HK_PROMOTION_ID),true(),false()))) ~> UpdateStrategy\nExpression, AzureSQLHubPromotionLookup exists(Expression@PROMOTION_ID == AzureSQLHubPromotionLookup@PROMOTION_ID,\n\tnegate:true,\n\tbroadcast: 'auto')~> CheckPromoIDExists\nSelectTableData filter(not(isNull(promo_id))) ~> FilterPromoData\nUpdateStrategy sink(allowSchemaDrift: true,\n\tvalidateSchema: true,\n\tinput(\n\t\tHK_PROMOTION_ID as string,\n\t\tPROMOTION_ID as string,\n\t\tLOAD_DTS as timestamp,\n\t\tREC_SRC as string\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tHK_PROMOTION_ID,\n\t\tPROMOTION_ID = promo_id,\n\t\tLOAD_DTS,\n\t\tREC_SRC\n\t)) ~> AzureSQLHubPromotion"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/AzurePostgreSql_Item_Info')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSql_HUB_PROMOTION')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/SAT_PROMOTION_DataFlow')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
@@ -795,7 +892,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Data_Vault_HUB_SAT_ITEM_Load_Pipeline')]",
+			"name": "[concat(parameters('factoryName'), '/Data_Vault_Item_Promo_Load_Pipeline')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -869,26 +966,7 @@
 							},
 							"traceLevel": "Fine"
 						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-11-08T16:06:21Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/HUB_ITEM_DataFlow')]",
-				"[concat(variables('factoryId'), '/dataflows/SAT_ITEM_DataFlow')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Data_Vault_HUB_SAT_PROMOTION_Load_Pipeline')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
+					},
 					{
 						"name": "HUB_PROMO_DataFlow",
 						"type": "ExecuteDataFlow",
@@ -958,6 +1036,50 @@
 							},
 							"traceLevel": "Fine"
 						}
+					},
+					{
+						"name": "LNK_ITEM_PROMOTION_DataFlow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "SAT_ITEM_DataFlow",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "SAT_PROMOTION_DataFlow",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "LNK_ITEM_PROMOTION_DataFlow",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"AzureSQLHubPromotion": {},
+									"AzureSQLHubItem": {},
+									"AzureSQLLnkItemPromotion": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
 					}
 				],
 				"policy": {
@@ -968,8 +1090,11 @@
 				"lastPublishTime": "2021-11-08T16:06:21Z"
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/HUB_ITEM_DataFlow')]",
+				"[concat(variables('factoryId'), '/dataflows/SAT_ITEM_DataFlow')]",
 				"[concat(variables('factoryId'), '/dataflows/HUB_PROMO_DataFlow')]",
-				"[concat(variables('factoryId'), '/dataflows/SAT_PROMOTION_DataFlow')]"
+				"[concat(variables('factoryId'), '/dataflows/SAT_PROMOTION_DataFlow')]",
+				"[concat(variables('factoryId'), '/dataflows/LNK_ITEM_PROMOTION_DataFlow')]"
 			]
 		}
 	]
